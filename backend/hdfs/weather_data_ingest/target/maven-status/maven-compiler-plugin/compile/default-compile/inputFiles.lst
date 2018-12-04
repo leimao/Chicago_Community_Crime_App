@@ -1,0 +1,3 @@
+/home/mpcs53013/eclipse-workspace/weather_data_ingest/src/main/java/edu/uchicago/leimao/weather_data_ingest/SerializeWeatherSummary.java
+/home/mpcs53013/eclipse-workspace/weather_data_ingest/target/generated-sources/thrift/edu/uchicago/mpcs53013/weatherSummary/WeatherSummary.java
+/home/mpcs53013/eclipse-workspace/weather_data_ingest/src/main/java/edu/uchicago/leimao/weather_data_ingest/WeatherSummaryProcessor.java

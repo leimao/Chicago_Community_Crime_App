@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Chicago Community Crime</title>
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300' rel='stylesheet' type='text/css'>
+  </head>
+  <body>
+    <div>
+      <h2 align="center"> Chicago Community Crime App </h2>
+      <p> This big data app will show the historic crime rate (average number of crimes per day per unit of community area size) at different Chicago communities under different weather conditions. The app might be helpful for research, real estate transactions, and daily communiting. </p>
+      <p> To use the app, simply put one of the Chicago community names, such as "Hyde Park", and click "Get Crime Info". </p>
+    </div>
+    <div class="container">
+      <fieldset>
+        <form action="/" method="post">
+          <input name="community" type="text" class="ghost-input" placeholder="Enter a Chicago Community" required>
+          <input type="submit" class="ghost-button" value="Get Crime Info">
+        </form>
+        <% if(error !== null){ %>
+          <br>
+          <p><%= error %></p>
+        <% } %>
+        <% if(crime !== null){ %>
+          <br>
+          <table>
+            <tr>
+              <th>Community</th>
+              <th>Clear</th>
+              <th>Fog</th>
+              <th>Rain</th>
+              <th>Snow</th>
+              <th>Hail</th>
+              <th>Thunder</th>
+              <th>Tornado</th>
+            </tr>
+            <tr>
+              <td><%= communityName %></td>
+              <td><%= crimeClear %></td>
+              <td><%= crimeFog %></td>
+              <td><%= crimeRain %></td>
+              <td><%= crimeSnow %></td>
+              <td><%= crimeHail %></td>
+              <td><%= crimeThunder %></td>
+              <td><%= crimeTornado %></td>
+            </tr>
+          </table>
+        <% } %>
+      </fieldset>
+    </div>
+    <div>
+      <!-- https://expressjs.com/en/starter/static-files.html -->
+      <!-- https://stackoverflow.com/questions/21235696/display-images-in-html-nodejs -->
+      <p> Find your community from the following map or <a href="https://en.wikipedia.org/wiki/Community_areas_in_Chicago">Wikipedia.</a></p>
+      <img src="/images/Chicago_community_areas_map.png" alt="Chicago Communities" class="center" width="50%">
+    </div>
+  </body>
+</html>

@@ -1,0 +1,3 @@
+disable 'leimao_community_crime_by_weather'
+drop 'leimao_community_crime_by_weather'
+exit

@@ -1,0 +1,2 @@
+create 'leimao_community_crime_by_weather', 'crime'
+exit

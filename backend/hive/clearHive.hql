@@ -1,0 +1,11 @@
+DROP TABLE IF EXISTS leimao_crime;
+DROP TABLE IF EXISTS leimao_crime_csv;
+DROP TABLE IF EXISTS leimao_weather;
+DROP TABLE IF EXISTS leimao_community_csv;
+DROP TABLE IF EXISTS leimao_community;
+DROP TABLE IF EXISTS leimao_crime_counts;
+DROP TABLE IF EXISTS leimao_weather_counts;
+DROP TABLE IF EXISTS leimao_crime_normalized_counts;
+DROP TABLE IF EXISTS leimao_community_crime_counts;
+DROP TABLE IF EXISTS leimao_community_crime_by_weather;
+DROP TABLE IF EXISTS leimao_crime_and_weather;
