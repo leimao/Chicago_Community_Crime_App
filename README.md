@@ -10,11 +10,6 @@ This Chicago Community Crime App is a big data app that will show the historic c
 
 This big data app is implemented using [Lambda Architecture](https://en.wikipedia.org/wiki/Lambda_architecture), containing Batch Layer, Serving Layer, and Speed Layer (Speed Layer remains to be implemented).
 
-<p align="center">
-    <img src = "./demo/demo.png">
-</p>
-
-
 ## Dependencies
 
 * Apache Hadoop 2.7.3
@@ -46,16 +41,18 @@ $ ./start_backend.sh --download-data
 
 #### Start Frontend Services
 
+To start the app:
+
 ```bash
-$ cd ./frontend/
-$ ./start_frontend.sh
+$ cd ./frontend/app/
+$ node leimao_app.js
 ```
 
-To start the app "permanently":
+Alternatively, To start the app "permanently":
 
 ```bash
-$ cd ~/project/frontend/app/
-$ node leimao_app.js &
+$ cd ./frontend/app/
+$ nohup node leimao_app.js &
 ```
 
 ### Start App on Cloud
@@ -119,11 +116,18 @@ $ cd ~/project/frontend/
 $ ./start_frontend_cloud.sh
 ```
 
-To start the app "permanently":
+To start the app:
 
 ```bash
 $ cd ~/project/frontend/app_cloud/
-$ node leimao_app.js &
+$ node leimao_app.js
+```
+
+Alternatively, To start the app "permanently":
+
+```bash
+$ cd ~/project/frontend/app_cloud/
+$ nohup node leimao_app.js &
 ```
 
 To kill the app:
@@ -140,6 +144,8 @@ $ kill -09 PID
 Go to [``http://127.0.0.1:3000/``](http://127.0.0.1:3000/) in browser.
 
 ### Visit App on Cloud
+
+``http://35.225.120.103:3246/``
 
 Go to [``http://35.225.120.103:3246/``](http://35.225.120.103:3246/) in browser.
 
