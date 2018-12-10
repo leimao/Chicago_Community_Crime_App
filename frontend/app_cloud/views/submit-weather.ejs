@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Chicago Community Crime</title>
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300' rel='stylesheet' type='text/css'>
+  </head>
+  <body>
+    <div>
+      <h2 align="center"> Chicago Community Crime App </h2>
+      <p> The NOAA GSOD dataset will be updated daily. You are allowed to submit the latest weather. </p>
+      <p> To submit new weather data to database, please input the date and the types of weather in the date, and click "Submit Weather Info". </p>
+      <p> Click <a href="/">here</a> to go back to the query page. </p>
+    </div>
+    <div class="container">
+      <fieldset>
+        <h3 align="center"> Report Chicago Weather </h3>
+        <form action="/submit-weather" method="post">
+          <table>
+            <tr>
+              <th>Date</th>
+              <th>Community</th>
+              <th>Fog</th>
+              <th>Rain</th>
+              <th>Snow</th>
+              <th>Hail</th>
+              <th>Thunder</th>
+              <th>Tornado</th>
+            </tr>
+            <tr>
+              <td><input name="date" type="date" class="ghost-input" placeholder="Enter the date" required></td>
+              <td><input name="community" type="text" class="ghost-input" placeholder="Enter the community" required></td>
+              <td><input type="checkbox" name="fog" value="1"></td>
+              <td><input type="checkbox" name="rain" value="1"></td>
+              <td><input type="checkbox" name="snow" value="1"></td>
+              <td><input type="checkbox" name="hair" value="1"></td>
+              <td><input type="checkbox" name="thunder" value="1"></td>
+              <td><input type="checkbox" name="tornado" value="1"></td>
+            </tr>
+          </table>
+          <input type="submit" class="ghost-button" value="Submit Weather Info">
+        </form>
+        <% if(error !== null){ %>
+          <br>
+          <p><%= error %></p>
+        <% } %>
+        <% if(success !== null){ %>
+          <br>
+          <p><%= success %></p>
+        <% } %>
+      </fieldset>
+    </div>
+    <div>
+      <!-- https://expressjs.com/en/starter/static-files.html -->
+      <!-- https://stackoverflow.com/questions/21235696/display-images-in-html-nodejs -->
+      <p> Find your community from the following map or <a href="https://en.wikipedia.org/wiki/Community_areas_in_Chicago">Wikipedia.</a></p>
+      <img src="/images/Chicago_community_areas_map.png" alt="Chicago Communities" class="center" width="50%">
+    </div>
+  </body>
+</html>

@@ -8,10 +8,11 @@ University of Chicago
 
 This Chicago Community Crime App is a big data app that will show the historic crime rate (average number of crimes per day per unit of community area size) at different Chicago communities under different weather conditions. The app might be helpful for research, real estate transactions, and daily communiting.
 
-This big data app is implemented using [Lambda Architecture](https://en.wikipedia.org/wiki/Lambda_architecture), containing Batch Layer, Serving Layer, and Speed Layer (Speed Layer remains to be implemented).
+This big data app is implemented using [Lambda Architecture](https://en.wikipedia.org/wiki/Lambda_architecture), containing Batch Layer, Serving Layer, and Speed Layer.
 
 ## Dependencies
 
+* Apache Maven 3.5.2
 * Apache Hadoop 2.7.3
 * Apache Hive 2.1.0
 * Apache HBase 1.1.2
@@ -145,16 +146,21 @@ Go to [``http://127.0.0.1:3000/``](http://127.0.0.1:3000/) in browser.
 
 ### Visit App on Cloud
 
+``http://35.225.120.103:3246/``
+
 Go to [``http://35.225.120.103:3246/``](http://35.225.120.103:3246/) in browser.
 
 
 ## Notes
 
-* Zookeeper sometimes dies. Reboot all zookeeper if necessary.
-
+* Zookeeper sometimes dies. Reboot all zookeepers if necessary.
+* ``mvn clean install`` could be used to compile all the Maven projects.
+* Speed Layers were run in the background using local mode (instead of yarn mode) by default. 
+* Use ``ps -ax | grep spark`` to find the PID of Spark Streaming processes to kill.
 
 ## To-Do List
 
-- [ ] Implement Speed Layer using Kafka and Spark Streaming.
+- [x] Implement Speed Layer using Kafka and Spark Streaming.
 - [ ] Incorporate GPS coordinates.
 - [ ] Integrate map with data in GUI.
+

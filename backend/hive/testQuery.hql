@@ -9,3 +9,4 @@ SELECT * FROM leimao_weather LIMIT 5;
 SELECT * FROM leimao_crime LIMIT 5;
 SELECT * FROM leimao_community LIMIT 1;
 SELECT * FROM leimao_community_crime_counts LIMIT 5;
+SELECT * FROM leimao_last_one_year_weather LIMIT 5;

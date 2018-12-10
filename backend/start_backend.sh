@@ -5,6 +5,8 @@ weatherDataDir="$projectPath/data/weatherData"
 crimeDataDir="$projectPath/data/crimeData"
 miscellaneousDataDir="$projectPath/data/miscellaneousData"
 weatherThriftJar="$projectPath/hdfs/weather_data_ingest/target/uber-weather_data_ingest-0.0.1-SNAPSHOT.jar"
+weatherSpeedLayerJar="$projectPath/kafka/speed_layer_weather_update/target/uber-speed_layer_weather_update-0.0.1-SNAPSHOT.jar"
+crimeSpeedLayerJar="$projectPath/kafka/speed_layer_crime_update/target/uber-speed_layer_crime_update-0.0.1-SNAPSHOT.jar"
 beelineConfigure="jdbc:hive2://localhost:10000"
 
 if [ "$1" == "--download-data" ]
@@ -75,6 +77,7 @@ echo "----------------------------------"
 
 beeline -u $beelineConfigure -f ./hive/joinCrimeWeather.hql
 beeline -u $beelineConfigure -f ./hive/viewCrimeFrequency.hql
+beeline -u $beelineConfigure -f ./hive/viewLastOneYearWeather.hql
 
 # Prepare HBase Views
 echo "----------------------------------"
@@ -98,3 +101,13 @@ echo "----------------------------------"
 echo "Testing query in HBase ..."
 echo "----------------------------------"
 hbase shell ./hbase/testQuery.txt
+
+# Start Kafka Stream
+echo "----------------------------------"
+echo "Start Kafka Stream ..."
+echo "----------------------------------"
+chmod +x ./kafka/createTopics.sh
+./kafka/createTopics.sh
+chmod +x ./kafka/startSpeedLayers.sh
+./kafka/startSpeedLayers.sh $weatherSpeedLayerJar $crimeSpeedLayerJar
+

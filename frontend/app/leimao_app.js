@@ -1,10 +1,13 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const hbase = require('hbase-rpc-client');
+//var Int64 = require('node-int64');
 const app = express();
 const hostname = '127.0.0.1';
 const port = 3000;
 const hbaseTable = 'leimao_community_crime_by_weather';
+const kafkaTopicCrime = 'leimao_crime_update'
+const kafkaTopicWeather = 'leimao_weather_update'
 
 //app.use(express.static('public'));
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -46,14 +49,29 @@ app.post('/', function (req, res) {
 
         if (!row) {
             //res.send('<html><body>No such community in Chicago!</body></html>');
-            res.render('index', {crime: null, error: 'No such community in Chicago.'});
+            res.render('index', {crime: null, error: 'No such community in Chicago or no crime found.'});
             return;
         }
 
         function crimeAvg(weather) {
-            var numCrimes = row.cols[`crime:${weather}_crime_sum`].value;
-            var numDays = row.cols[`crime:${weather}_days`].value;
+            var numCrimesBuffer = row.cols[`crime:${weather}_crime_sum`].value;
+            var numCrimesBigInt = BigInt(`0x${numCrimesBuffer.toString('hex', 0, 8)}`);
+            var numCrimes = Number(numCrimesBigInt);
+            //console.log(numCrimes)
+            var numDaysBuffer = row.cols[`crime:${weather}_days`].value;
+            var numDaysBigInt = BigInt(`0x${numDaysBuffer.toString('hex', 0, 8)}`);
+            var numDays = Number(numDaysBigInt);
+
+            //var areaBuffer = row.cols['crime:communityArea'].value;
+            //var areaBigInt = BigInt(`0x${areaBuffer.toString('hex', 0, 8)}`);
+            //var area = Number(areaBigInt);
             var area = row.cols['crime:communityArea'].value;
+
+            /* Alternative solution */
+            // https://github.com/nodejs/node/issues/21956#issuecomment-445477288
+            // var int64 = new Int64(numCrimesBuffer);
+            // var int32 = int64.toNumber(true)
+
             const scaleFactor = 1e8;
             if (numDays == 0) {
                 return 'NULL';
@@ -78,7 +96,103 @@ app.post('/', function (req, res) {
     })
 });
 
+
+
+/* Send simulated weather to kafka */
+var kafka = require('kafka-node');
+var Producer = kafka.Producer;
+var KeyedMessage = kafka.KeyedMessage;
+var kafkaClient = new kafka.KafkaClient({kafkaHost: 'localhost:9092'});
+/* var kafkaClient = new kafka.KafkaClient({kafkaHost: '10.0.0.2:6667'}); */
+var kafkaProducer = new Producer(kafkaClient);
+
+app.get('/submit-crime', function (req, res) {
+    // res.send('Hellow Underworld!');
+    res.render('submit-crime', {success: null, error: null});
+});
+
+
+app.post('/submit-crime',function (req, res) {
+    const caseNumber = req.body.caseNumber.trim();
+    const community = req.body.community.trim().toLowerCase();
+    const date = req.body.date;
+    const dateInfo = date.split('-');
+    const year = parseInt(dateInfo[0]);
+    const month = parseInt(dateInfo[1]);
+    const day = parseInt(dateInfo[2]);
+    var crimeUpdate = {
+        caseNumber : caseNumber,
+        community : community,
+        year : year,
+        month : month,
+        day : day
+    };
+
+    kafkaProducer.send([{topic: kafkaTopicCrime, messages: JSON.stringify(crimeUpdate)}],
+        function (err, data) {
+            if (err) {
+                res.render('submit-crime', {success: null, error: 'Some error just happened.'});
+            }
+            else {
+                res.render('submit-crime', {success: 'Crime update sent successfully.', error: null});
+            }
+        });
+
+});
+
+
+app.get('/submit-weather', function (req, res) {
+    // res.send('Hellow Underworld!');
+    res.render('submit-weather', {success: null, error: null});
+});
+
+app.post('/submit-weather',function (req, res) {
+    const date = req.body.date.trim();
+    const community = req.body.community.trim().toLowerCase();
+    const dateInfo = date.split('-');
+    const year = parseInt(dateInfo[0]);
+    const month = parseInt(dateInfo[1]);
+    const day = parseInt(dateInfo[2]);
+    const fog = req.body.fog ? true : false;
+    const rain = req.body.rain ? true : false;
+    const snow = req.body.snow ? true : false;
+    const hail = req.body.hail ? true : false;
+    const thunder = req.body.thunder ? true : false;
+    const tornado = req.body.tornado ? true : false;
+    const dateString = dateInfo.join('');
+
+    var weatherUpdate = {
+        date : dateString,
+        community : community,
+        fog : fog,
+        rain : rain,
+        snow : snow,
+        hail : hail,
+        thunder : thunder,
+        tornado : tornado
+    };
+
+
+    kafkaProducer.send([{topic: kafkaTopicWeather, messages: JSON.stringify(weatherUpdate)}],
+        function (err, data) {
+            if (err) {
+                res.render('submit-weather', {success: null, error: 'Some error just happened.'});
+            }
+            else {
+                res.render('submit-weather', {success: 'Weather update sent successfully.', error: null});
+            }
+        });
+
+});
+
+/* Use the following on VM */
 app.listen(port, hostname, function () {
     console.log(`App starts to listen to http://${hostname}:${port}!`)
 });
 
+/* Use the following on Cloud */
+/*
+app.listen(port, function () {
+    console.log(`App starts to listen to port ${port}!`)
+});
+*/

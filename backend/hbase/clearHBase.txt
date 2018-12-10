@@ -1,3 +1,13 @@
 disable 'leimao_community_crime_by_weather'
 drop 'leimao_community_crime_by_weather'
+
+disable 'leimao_latest_crime'
+drop 'leimao_latest_crime'
+
+disable 'leimao_latest_weather'
+drop 'leimao_latest_weather'
+
+disable 'leimao_last_one_year_weather_chicago'
+drop 'leimao_last_one_year_weather_chicago'
+
 exit

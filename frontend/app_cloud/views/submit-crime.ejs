@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Chicago Community Crime</title>
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300' rel='stylesheet' type='text/css'>
+  </head>
+  <body>
+    <div>
+      <h2 align="center"> Chicago Community Crime App </h2>
+      <p> The Chicago crime database contains crime data from 2001 to present, minus the most recent seven days. You are allowed to submit new crime instances. </p>
+      <p> To submit new crime instances to database, please input the crime case number, the community where the crime happened, and the date, and click "Submit Crime Info". </p>
+      <p> Click <a href="/">here</a> to go back to the query page. </p>
+    </div>
+    <div class="container">
+      <fieldset>
+        <h3 align="center"> Report Chicago Community Crime </h3>
+        <form action="/submit-crime" method="post">
+          <input name="caseNumber" type="text" class="ghost-input" placeholder="Enter the Crime Case Number" required>
+          <input name="community" type="text" class="ghost-input" placeholder="Enter the Chicago Community" required>
+          <input name="date" type="date" class="ghost-input" placeholder="Enter the date" required>
+          <input type="submit" class="ghost-button" value="Submit Crime Info">
+        </form>
+        <% if(error !== null){ %>
+          <br>
+          <p><%= error %></p>
+        <% } %>
+        <% if(success !== null){ %>
+          <br>
+          <p><%= success %></p>
+        <% } %>
+      </fieldset>
+    </div>
+    <div>
+      <!-- https://expressjs.com/en/starter/static-files.html -->
+      <!-- https://stackoverflow.com/questions/21235696/display-images-in-html-nodejs -->
+      <p> Find your community from the following map or <a href="https://en.wikipedia.org/wiki/Community_areas_in_Chicago">Wikipedia.</a></p>
+      <img src="/images/Chicago_community_areas_map.png" alt="Chicago Communities" class="center" width="50%">
+    </div>
+  </body>
+</html>

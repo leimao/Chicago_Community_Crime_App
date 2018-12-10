@@ -9,9 +9,13 @@
   "author": "Lei Mao",
   "license": "MIT",
   "dependencies": {
+    "big-integer": "^1.6.40",
     "body-parser": "^1.18.3",
     "ejs": "^2.6.1",
     "express": "^4.16.4",
-    "hbase-rpc-client": "^0.1.15"
+    "hbase-rpc-client": "^0.1.15",
+    "int64-buffer": "^0.99.1007",
+    "kafka-node": "^3.0.1",
+    "node-int64": "^0.4.0"
   }
 }

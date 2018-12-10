@@ -1,2 +1,9 @@
 create 'leimao_community_crime_by_weather', 'crime'
+
+create 'leimao_latest_crime', 'crime'
+
+create 'leimao_latest_weather', 'weather'
+
+create 'leimao_last_one_year_weather_chicago', 'weather'
+
 exit

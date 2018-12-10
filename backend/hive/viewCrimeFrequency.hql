@@ -40,8 +40,9 @@ INSERT OVERWRITE TABLE leimao_weather_counts
 
 
 CREATE TABLE leimao_community_crime_counts (
-    communityId smallint,
     communityName string,
+    communityId smallint,
+    --communityName string,
     communityArea double,
     crime_sum bigint,
     fog_crime_sum bigint,
@@ -63,7 +64,8 @@ CREATE TABLE leimao_community_crime_counts (
 
 --Community name use lowercase
 INSERT OVERWRITE TABLE leimao_community_crime_counts
-    SELECT cc.communityId, LOWER(c.community), c.shapearea, cc.crime_sum, cc.fog_crime_sum, cc.rain_crime_sum, cc.snow_crime_sum, cc.hail_crime_sum, cc.thunder_crime_sum, cc.tornado_crime_sum, cc.clear_crime_sum, wc.days, wc.fog_days, wc.rain_days, wc.snow_days, wc.hail_days, wc.thunder_days, wc.tornado_days, wc.clear_days
+--    SELECT cc.communityId, LOWER(c.community), c.shapearea, cc.crime_sum, cc.fog_crime_sum, cc.rain_crime_sum, cc.snow_crime_sum, cc.hail_crime_sum, cc.thunder_crime_sum, cc.tornado_crime_sum, cc.clear_crime_sum, wc.days, wc.fog_days, wc.rain_days, wc.snow_days, wc.hail_days, wc.thunder_days, wc.tornado_days, wc.clear_days
+    SELECT LOWER(c.community), cc.communityId, c.shapearea, cc.crime_sum, cc.fog_crime_sum, cc.rain_crime_sum, cc.snow_crime_sum, cc.hail_crime_sum, cc.thunder_crime_sum, cc.tornado_crime_sum, cc.clear_crime_sum, wc.days, wc.fog_days, wc.rain_days, wc.snow_days, wc.hail_days, wc.thunder_days, wc.tornado_days, wc.clear_days
     FROM leimao_crime_counts cc JOIN leimao_community c ON cc.communityId = c.AreaNumber CROSS JOIN leimao_weather_counts wc;
 
 

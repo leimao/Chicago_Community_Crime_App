@@ -9,3 +9,6 @@ DROP TABLE IF EXISTS leimao_crime_normalized_counts;
 DROP TABLE IF EXISTS leimao_community_crime_counts;
 DROP TABLE IF EXISTS leimao_community_crime_by_weather;
 DROP TABLE IF EXISTS leimao_crime_and_weather;
+DROP TABLE IF EXISTS leimao_last_seven_days_weather;
+DROP TABLE IF EXISTS leimao_last_one_year_weather;
+DROP TABLE IF EXISTS leimao_last_one_year_weather_chicago;
