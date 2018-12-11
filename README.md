@@ -149,7 +149,7 @@ $ kill -09 PID
 #### Start Simulated Data Stream
 
 ```bash
-$ cd ./backend/
+$ cd ~/project/backend/
 $ ./start_simulated_data_cloud.sh
 ```
 
