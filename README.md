@@ -31,9 +31,18 @@ This big data app was implemented using [Lambda Architecture](https://en.wikiped
 
 ### Start App Locally
 
+#### Compile Maven Projects
+
+```bash
+$ chmod +x ./backend/compile_maven_projects.sh
+$ cd ./backend/
+$ ./compile_maven_projects.sh
+```
+
 #### Start Backend Services
 
 ```bash
+$ chmod +x ./backend/start_backend.sh
 $ cd ./backend/
 $ ./start_backend.sh --download-data
 ```
@@ -59,6 +68,7 @@ $ nohup node leimao_app.js &
 #### Start Simulated Data Stream
 
 ```bash
+$ chmod +x ./backend/start_simulated_data.sh
 $ cd ./backend/
 $ ./start_simulated_data.sh
 ```
@@ -67,6 +77,14 @@ There will be 0-3 crime instances sending to speed layer every minute.
 
 
 ### Start App on Cloud
+
+#### Compile Maven Projects
+
+```bash
+$ chmod +x ./backend/compile_maven_projects_cloud.sh
+$ cd ./backend/
+$ ./compile_maven_projects_cloud.sh
+```
 
 #### Send Files to Cloud
 
@@ -149,6 +167,7 @@ $ kill -09 PID
 #### Start Simulated Data Stream
 
 ```bash
+$ chmod +x ~/project/backend/start_simulated_data_cloud.sh
 $ cd ~/project/backend/
 $ ./start_simulated_data_cloud.sh
 ```
