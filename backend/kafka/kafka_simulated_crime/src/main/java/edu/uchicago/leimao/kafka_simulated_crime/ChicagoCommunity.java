@@ -1,0 +1,93 @@
+package edu.uchicago.leimao.kafka_simulated_crime;
+
+import java.util.List;
+import java.util.Arrays;
+import java.util.Random;
+
+public class ChicagoCommunity {
+	public static String getRandomCommunity() {
+		Random rand = new Random();
+		int numCommunities = communities.size();
+		int randId = rand.nextInt(numCommunities);
+		return communities.get(randId);
+	}
+	static List<String> communities = Arrays.asList(
+			"near north side",
+			"loop",
+			"near south side",
+			"north center",
+			"lake view",
+			"lincoln park",
+			"avondale",
+			"logan square",
+			"rogers park",
+			"west ridge",
+			"uptown",
+			"lincoln square",
+			"edison park",
+			"norwood park",
+			"jefferson park",
+			"forest glen",
+			"north park",
+			"albany park",
+			"ohare",
+			"edgewater",
+			"portage park",
+			"irving park",
+			"dunning",
+			"montclare",
+			"belmont cragin",
+			"hermosa",
+			"humboldt park",
+			"west town",
+			"austin",
+			"west garfield park",
+			"east garfield park",
+			"near west side",
+			"north lawndale",
+			"south lawndale",
+			"lower west side",
+			"armour square",
+			"douglas",
+			"oakland",
+			"fuller park",
+			"grand boulevard",
+			"kenwood",
+			"washington park",
+			"hyde park",
+			"woodlawn",
+			"south shore",
+			"bridgeport",
+			"greater grand crossing",
+			"garfield ridge",
+			"archer heights",
+			"brighton park",
+			"mckinley park",
+			"new city",
+			"west elsdon",
+			"gage park",
+			"clearing",
+			"west lawn",
+			"chicago lawn",
+			"west englewood",
+			"englewood",
+			"chatham",
+			"avalon park",
+			"south chicago",
+			"burnside",
+			"calumet heights",
+			"roseland",
+			"pullman",
+			"south deering",
+			"east side",
+			"west pullman",
+			"riverdale",
+			"hegewisch",
+			"ashburn",
+			"auburn gresham",
+			"beverly",
+			"washington heights",
+			"mount greenwood",
+			"morgan park"
+			);
+}

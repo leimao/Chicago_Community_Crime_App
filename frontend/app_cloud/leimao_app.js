@@ -124,6 +124,20 @@ app.post('/submit-crime',function (req, res) {
     const year = parseInt(dateInfo[0]);
     const month = parseInt(dateInfo[1]);
     const day = parseInt(dateInfo[2]);
+
+    var date_today = new Date();
+    date_today.setHours(0,0,0,0)
+    var date_crime = new Date(date);
+    var date_diff = Math.floor((date_today-date_crime) / (1000 * 3600 * 24));
+    if (date_diff < 0) {
+        res.render('submit-crime', {success: null, error: 'Could not submit future crime instance!'});
+        return;
+    }
+    if (date_diff > 365) {
+        res.render('submit-crime', {success: null, error: 'Crime instance too old to submit! Please submit crime instance within one year.'});
+        return;
+    }
+
     var crimeUpdate = {
         caseNumber : caseNumber,
         community : community,
@@ -164,6 +178,19 @@ app.post('/submit-weather',function (req, res) {
     const thunder = req.body.thunder ? true : false;
     const tornado = req.body.tornado ? true : false;
     const dateString = dateInfo.join('');
+
+    var date_today = new Date();
+    date_today.setHours(0,0,0,0)
+    var date_weather = new Date(date);
+    var date_diff = Math.floor((date_today-date_weather) / (1000 * 3600 * 24));
+    if (date_diff < 0) {
+        res.render('submit-weather', {success: null, error: 'Could not submit future weather instance!'});
+        return;
+    }
+    if (date_diff > 365) {
+        res.render('submit-weather', {success: null, error: 'Weather instance too old to submit! Please submit weather instance within one year.'});
+        return;
+    }
 
     var weatherUpdate = {
         date : dateString,

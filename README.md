@@ -8,7 +8,7 @@ University of Chicago
 
 This Chicago Community Crime App is a big data app that will show the historic crime rate (average number of crimes per day per unit of community area size) at different Chicago communities under different weather conditions. The app might be helpful for research, real estate transactions, and daily communiting.
 
-This big data app is implemented using [Lambda Architecture](https://en.wikipedia.org/wiki/Lambda_architecture), containing Batch Layer, Serving Layer, and Speed Layer.
+This big data app was implemented using [Lambda Architecture](https://en.wikipedia.org/wiki/Lambda_architecture), containing batch layer, serving layer, and speed layer. A real-time crime data stream simulator has also been developed for sending simulated data into the speed layer.
 
 ## Dependencies
 
@@ -38,7 +38,7 @@ $ cd ./backend/
 $ ./start_backend.sh --download-data
 ```
 
-``--download-data`` is not required if you have already downloaded the data.
+``--download-data`` is not required if you have already downloaded the data and ingested the data into HDFS.
 
 #### Start Frontend Services
 
@@ -56,6 +56,16 @@ $ cd ./frontend/app/
 $ nohup node leimao_app.js &
 ```
 
+#### Start Simulated Data Stream
+
+```bash
+$ cd ./backend/
+$ ./start_simulated_data.sh
+```
+
+There will be 0-3 crime instances sending to speed layer every minute.
+
+
 ### Start App on Cloud
 
 #### Send Files to Cloud
@@ -64,7 +74,6 @@ Send backend files to ``class-m-0-20181017030211`` where HDFS is installed:
 
 ```bash
 $ tar -czvf ./backend.tar.gz ./backend/
-$ gcloud compute ssh leimao@class-m-0-20181017030211 --command='rm -rf ~/project/'
 $ gcloud compute ssh leimao@class-m-0-20181017030211 --command='mkdir -p ~/project/'
 $ gcloud compute scp ./backend.tar.gz leimao@class-m-0-20181017030211:~/project/
 $ rm ./backend.tar.gz
@@ -74,7 +83,6 @@ Send frontend files to ``appserver``:
 
 ```bash
 $ tar -czvf ./frontend.tar.gz ./frontend/
-$ gcloud compute ssh leimao@appserver --command='rm -rf ~/project/'
 $ gcloud compute ssh leimao@appserver --command='mkdir -p ~/project/'
 $ gcloud compute scp ./frontend.tar.gz leimao@appserver:~/project/
 $ rm ./frontend.tar.gz
@@ -98,7 +106,7 @@ $ cd ~/project/backend/
 $ ./start_backend_cloud.sh --download-data
 ```
 
-``--download-data`` is not required if you have already downloaded the data.
+``--download-data`` is not required if you have already downloaded the data and ingested the data into HDFS.
 
 #### Start Frontend Services
 
@@ -138,6 +146,16 @@ $ top -U leimao
 $ kill -09 PID
 ```
 
+#### Start Simulated Data Stream
+
+```bash
+$ cd ./backend/
+$ ./start_simulated_data_cloud.sh
+```
+
+There will be 0-3 crime instances sending to speed layer every minute.
+
+
 ## Use App
 
 ### Visit App Locally
@@ -146,8 +164,6 @@ Go to [``http://127.0.0.1:3000/``](http://127.0.0.1:3000/) in browser.
 
 ### Visit App on Cloud
 
-``http://35.225.120.103:3246/``
-
 Go to [``http://35.225.120.103:3246/``](http://35.225.120.103:3246/) in browser.
 
 
@@ -155,12 +171,12 @@ Go to [``http://35.225.120.103:3246/``](http://35.225.120.103:3246/) in browser.
 
 * Zookeeper sometimes dies. Reboot all zookeepers if necessary.
 * ``mvn clean install`` could be used to compile all the Maven projects.
-* Speed Layers were run in the background using local mode (instead of yarn mode) by default. 
+* Speed layers were run in the background using local mode (instead of yarn mode) by default. 
 * Use ``ps -ax | grep spark`` to find the PID of Spark Streaming processes to kill.
 
 ## To-Do List
 
-- [x] Implement Speed Layer using Kafka and Spark Streaming.
+- [x] Implement speed layer using Kafka and Spark Streaming.
 - [ ] Incorporate GPS coordinates.
 - [ ] Integrate map with data in GUI.
 

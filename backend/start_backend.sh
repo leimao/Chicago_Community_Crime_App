@@ -18,13 +18,11 @@ fi
 
 # Clear data
 echo "----------------------------------"
-echo "Cleaning existing data ..."
+echo "Cleaning existing data in Hive and HBase ..."
 echo "----------------------------------"
 hbase shell ./hbase/clearHBase.txt 
 #hive -f ./hive/clearHive.hql
 beeline -u $beelineConfigure -f ./hive/clearHive.hql
-chmod +x ./hdfs/clearHDFS.sh
-./hdfs/clearHDFS.sh
 
 # Download data
 if $downloadData
@@ -43,18 +41,20 @@ if $downloadData
         ./hdfs/getCrime.sh $crimeDataDir
         ./miscellaneous/getStations.sh $miscellaneousDataDir
         ./miscellaneous/getCommunity.sh $miscellaneousDataDir
-fi
 
-# Ingest data into HDFS
-echo "----------------------------------"
-echo "Ingesting data into HDFS ..."
-echo "----------------------------------"
-chmod +x ./hdfs/ingestWeather.sh
-chmod +x ./hdfs/ingestCrime.sh
-chmod +x ./hdfs/ingestMiscellaneous.sh 
-./hdfs/ingestWeather.sh $weatherDataDir $weatherThriftJar
-./hdfs/ingestCrime.sh $crimeDataDir
-./hdfs/ingestMiscellaneous.sh $miscellaneousDataDir
+        # Ingest data into HDFS
+        echo "----------------------------------"
+        echo "Ingesting data into HDFS ..."
+        echo "----------------------------------"
+        chmod +x ./hdfs/clearHDFS.sh
+        ./hdfs/clearHDFS.sh
+        chmod +x ./hdfs/ingestWeather.sh
+        chmod +x ./hdfs/ingestCrime.sh
+        chmod +x ./hdfs/ingestMiscellaneous.sh 
+        ./hdfs/ingestWeather.sh $weatherDataDir $weatherThriftJar
+        ./hdfs/ingestCrime.sh $crimeDataDir
+        ./hdfs/ingestMiscellaneous.sh $miscellaneousDataDir
+fi
 
 # Load data into Hive
 echo "----------------------------------"
