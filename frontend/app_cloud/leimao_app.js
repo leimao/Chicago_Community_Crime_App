@@ -186,44 +186,52 @@ app.post('/taxi', function (req, res) {
                 res.render('index', {crime_taxi: null, error_taxi: null, crime_weather: null, error_weather: 'Some error just happened.'});
                 return;
             } 
-            if (!row) {
-                res.render('index', {crime_taxi: null, error_taxi: null, crime_weather: null, error_weather: 'No such community in Chicago or no crime found.'});
-                return;
-            }
 
             route_go_row = row[0];
             route_back_row = row[1];
+
+            if ((!route_back_row) || (!route_go_row)) {
+                res.render('index', {crime_taxi: null, error_taxi: null, crime_weather: null, error_weather: 'No such route found!'});
+                return;
+            }
 
             var date_today = new Date();
             date_today.setHours(0,0,0,0);
             var date_first = new Date("2013-01-01");
             var date_diff = Math.floor((date_today-date_first) / (1000 * 3600 * 24));
 
-            var routeDurationSumBuffer = route_go_row.cols['taxi:trip_duration_sum'].value;
-            var routeDurationSumBigInt = routeDurationSumBuffer.readIntBE(0, 8);
-            var routeDurationSum = Number(routeDurationSumBigInt);
-            var totalCostSumBuffer = route_go_row.cols['taxi:total_cost_sum'].value;
-            var totalCostSumBigInt = totalCostSumBuffer.readIntBE(0, 8);
-            var totalCostSum = Number(totalCostSumBigInt);
-            var numTripsBuffer = route_go_row.cols['taxi:num_trips'].value;
-            var numTripsBigInt = numTripsBuffer.readIntBE(0, 8);
-            var numTrips = Number(numTripsBigInt);
-            var costAvg1 = (totalCostSum / numTrips).toFixed(1);
-            var timeAvg1 = (routeDurationSum / numTrips / 60).toFixed(1);
-            var frequency1 = (numTrips / date_diff).toFixed(1);
+            try {
+                var routeDurationSumBuffer = route_go_row.cols['taxi:trip_duration_sum'].value;
+                var routeDurationSumBigInt = routeDurationSumBuffer.readIntBE(0, 8);
+                var routeDurationSum = Number(routeDurationSumBigInt);
+                var totalCostSumBuffer = route_go_row.cols['taxi:total_cost_sum'].value;
+                var totalCostSumBigInt = totalCostSumBuffer.readIntBE(0, 8);
+                var totalCostSum = Number(totalCostSumBigInt);
+                var numTripsBuffer = route_go_row.cols['taxi:num_trips'].value;
+                var numTripsBigInt = numTripsBuffer.readIntBE(0, 8);
+                var numTrips = Number(numTripsBigInt);
+                var costAvg1 = (totalCostSum / numTrips).toFixed(1);
+                var timeAvg1 = (routeDurationSum / numTrips / 60).toFixed(1);
+                var frequency1 = (numTrips / date_diff).toFixed(1);
 
-            var routeDurationSumBuffer = route_back_row.cols['taxi:trip_duration_sum'].value;
-            var routeDurationSumBigInt = routeDurationSumBuffer.readIntBE(0, 8);
-            var routeDurationSum = Number(routeDurationSumBigInt);
-            var totalCostSumBuffer = route_back_row.cols['taxi:total_cost_sum'].value;
-            var totalCostSumBigInt = totalCostSumBuffer.readIntBE(0, 8);
-            var totalCostSum = Number(totalCostSumBigInt);
-            var numTripsBuffer = route_back_row.cols['taxi:num_trips'].value;
-            var numTripsBigInt = numTripsBuffer.readIntBE(0, 8);
-            var numTrips = Number(numTripsBigInt);
-            var costAvg2 = (totalCostSum / numTrips).toFixed(1);
-            var timeAvg2 = (routeDurationSum / numTrips / 60).toFixed(1);
-            var frequency2 = (numTrips / date_diff).toFixed(1);
+                var routeDurationSumBuffer = route_back_row.cols['taxi:trip_duration_sum'].value;
+                var routeDurationSumBigInt = routeDurationSumBuffer.readIntBE(0, 8);
+                var routeDurationSum = Number(routeDurationSumBigInt);
+                var totalCostSumBuffer = route_back_row.cols['taxi:total_cost_sum'].value;
+                var totalCostSumBigInt = totalCostSumBuffer.readIntBE(0, 8);
+                var totalCostSum = Number(totalCostSumBigInt);
+                var numTripsBuffer = route_back_row.cols['taxi:num_trips'].value;
+                var numTripsBigInt = numTripsBuffer.readIntBE(0, 8);
+                var numTrips = Number(numTripsBigInt);
+                var costAvg2 = (totalCostSum / numTrips).toFixed(1);
+                var timeAvg2 = (routeDurationSum / numTrips / 60).toFixed(1);
+                var frequency2 = (numTrips / date_diff).toFixed(1);
+            }
+            catch (error) {
+                console.log(error);
+                res.render('index', {crime_taxi: null, error_taxi: 'No route data!', crime_weather: null, error_weather: null});
+                return;
+            }
 
             res.render('index', {crime_weather: null, error_weather: null, crime_taxi: true, error_taxi: null, 
                 communityName1: communityName1, 
