@@ -9,8 +9,9 @@
   <body>
     <div>
       <h2 align="center"> Chicago Community Crime App </h2>
-      <p> This big data app will show the historic crime rate (average number of crimes per day per unit of community area size) at different Chicago communities under different weather conditions. The app might be helpful for research, real estate transactions, and daily communiting. The data sources are <a href="https://data.cityofchicago.org/Public-Safety/Crimes-2001-to-present/ijzp-q8t2">Chicago Crime</a> dataset and <a href="https://data.noaa.gov/dataset/dataset/global-surface-summary-of-the-day-gsod">NOAA GSOD</a> dataset. </p>
-      <p> To use the app, simply put one of the Chicago community names, such as "Hyde Park", and click "Get Crime Info". </p>
+      <p> This big data app will show the historic crime rate (average number of crimes per day per unit of community area size) at different Chicago communities under different weather conditions. The app might be helpful for research, real estate transactions, and daily communiting. The data sources are <a href="https://data.cityofchicago.org/Public-Safety/Crimes-2001-to-present/ijzp-q8t2">Chicago Crime</a> dataset, <a href="https://data.noaa.gov/dataset/dataset/global-surface-summary-of-the-day-gsod">NOAA GSOD</a> dataset, and  <a href="https://data.cityofchicago.org/Transportation/Taxi-Trips/wrvz-psew">Chicago Taxi Trip dataset</a>. </p>
+      <p> To look for community crime information, simply select one of the Chicago communities, such as "Hyde Park", and click "Get Crime Info". </p>
+      <p> To look for taxi trip safety information, select the pickup community and the dropoff community, such as "Hyde Park" and "O'Hare", and click "Get Trip Info". </p>
       <p> To add new weather data to the database, please use the <a href="submit-weather">weather submission form</a>. </p>
       <p> To add new crime data to the database, please use the <a href="submit-crime">crime submission form</a>. </p>
       <p> There will also be simulated or live new crime data stream going into the database. </p>
@@ -138,7 +139,7 @@
         <form action="/taxi" method="post">
           <!-- <label for="community_selection">Select Community:</label> -->
           <select name="community_pickup" id="community_selection">
-            <option selected disabled, value="-">Select Chicago Community To Picup</option>
+            <option selected disabled, value="-">Select Chicago Community To Pickup</option>
             <option value="albany park">Albany Park</option>
             <option value="archer heights">Archer Heights</option>
             <option value="armour square">Armour Square</option>
