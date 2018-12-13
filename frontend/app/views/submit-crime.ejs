@@ -18,7 +18,87 @@
         <h3 align="center"> Report Chicago Community Crime </h3>
         <form action="/submit-crime" method="post">
           <input name="caseNumber" type="text" class="ghost-input" placeholder="Enter the Crime Case Number" required>
-          <input name="community" type="text" class="ghost-input" placeholder="Enter the Chicago Community" required>
+          <select name="community">
+            <option selected disabled>Select Chicago Community</option>
+            <option value="albany park">Albany Park</option>
+            <option value="archer heights">Archer Heights</option>
+            <option value="armour square">Armour Square</option>
+            <option value="ashburn">Ashburn</option>
+            <option value="auburn gresham">Auburn Gresham</option>
+            <option value="austin">Austin</option>
+            <option value="avalon park">Avalon Park</option>
+            <option value="avondale">Avondale</option>
+            <option value="belmont cragin">Belmont Cragin</option>
+            <option value="beverly">Beverly</option>
+            <option value="bridgeport">Bridgeport</option>
+            <option value="brighton park">Brighton Park</option>
+            <option value="burnside">Burnside</option>
+            <option value="calumet heights">Calumet Heights</option>
+            <option value="chatham">Chatham</option>
+            <option value="chicago lawn">Chicago Lawn</option>
+            <option value="clearing">Clearing</option>
+            <option value="douglas">Douglas</option>
+            <option value="dunning">Dunning</option>
+            <option value="east garfield park">East Garfield Park</option>
+            <option value="east side">East Side</option>
+            <option value="edgewater">Edgewater</option>
+            <option value="edison park">Edison Park</option>
+            <option value="englewood">Englewood</option>
+            <option value="forest glen">Forest Glen</option>
+            <option value="fuller park">Fuller Park</option>
+            <option value="gage park">Gage Park</option>
+            <option value="garfield ridge">Garfield Ridge</option>
+            <option value="grand boulevard">Grand Boulevard</option>
+            <option value="greater grand crossing">Greater Grand Crossing</option>
+            <option value="hegewisch">Hegewisch</option>
+            <option value="hermosa">Hermosa</option>
+            <option value="humboldt park">Humboldt Park</option>
+            <option value="hyde park">Hyde Park</option>
+            <option value="irving park">Irving Park</option>
+            <option value="jefferson park">Jefferson Park</option>
+            <option value="kenwood">Kenwood</option>
+            <option value="lake view">Lake View</option>
+            <option value="lincoln park">Lincoln Park</option>
+            <option value="lincoln square">Lincoln Square</option>
+            <option value="logan square">Logan Square</option>
+            <option value="loop">Loop</option>
+            <option value="lower west side">Lower West Side</option>
+            <option value="mckinley park">Mckinley Park</option>
+            <option value="montclare">Montclare</option>
+            <option value="morgan park">Morgan Park</option>
+            <option value="mount greenwood">Mount Greenwood</option>
+            <option value="near north side">Near North Side</option>
+            <option value="near south side">Near South Side</option>
+            <option value="near west side">Near West Side</option>
+            <option value="new city">New City</option>
+            <option value="north center">North Center</option>
+            <option value="north lawndale">North Lawndale</option>
+            <option value="north park">North Park</option>
+            <option value="norwood park">Norwood Park</option>
+            <option value="oakland">Oakland</option>
+            <option value="ohare">O'Hare</option>
+            <option value="portage park">Portage Park</option>
+            <option value="pullman">Pullman</option>
+            <option value="riverdale">Riverdale</option>
+            <option value="rogers park">Rogers Park</option>
+            <option value="roseland">Roseland</option>
+            <option value="south chicago">South Chicago</option>
+            <option value="south deering">South Deering</option>
+            <option value="south lawndale">South Lawndale</option>
+            <option value="south shore">South Shore</option>
+            <option value="uptown">Uptown</option>
+            <option value="washington heights">Washington Heights</option>
+            <option value="washington park">Washington Park</option>
+            <option value="west elsdon">West Elsdon</option>
+            <option value="west englewood">West Englewood</option>
+            <option value="west garfield park">West Garfield Park</option>
+            <option value="west lawn">West Lawn</option>
+            <option value="west pullman">West Pullman</option>
+            <option value="west ridge">West Ridge</option>
+            <option value="west town">West Town</option>
+            <option value="woodlawn">Woodlawn</option>
+          </select>
+          <!-- <input name="community" type="text" class="ghost-input" placeholder="Enter a Chicago Community" required> -->
           <input name="date" type="date" class="ghost-input" placeholder="Enter the date" required>
           <input type="submit" class="ghost-button" value="Submit Crime Info">
         </form>

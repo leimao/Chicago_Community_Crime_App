@@ -10,4 +10,7 @@ drop 'leimao_latest_weather'
 disable 'leimao_last_one_year_weather_chicago'
 drop 'leimao_last_one_year_weather_chicago'
 
+disable 'leimao_taxi_trips_by_community_chicago'
+drop 'leimao_taxi_trips_by_community_chicago'
+
 exit

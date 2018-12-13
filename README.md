@@ -6,7 +6,7 @@ University of Chicago
 
 ## Introduction
 
-This Chicago Community Crime App is a big data app that will show the historic crime rate (average number of crimes per day per unit of community area size) at different Chicago communities under different weather conditions. The app might be helpful for research, real estate transactions, and daily communiting.
+This Chicago Community Crime App is a big data app that will show the historic crime rate (average number of crimes per day per unit of community area size) at different Chicago communities under different weather conditions. The app also provide information of historic taxi trip information along with the crime information between two communities. The app might be helpful for research, real estate transactions, and daily communiting.
 
 This big data app was implemented using [Lambda Architecture](https://en.wikipedia.org/wiki/Lambda_architecture), containing batch layer, serving layer, and speed layer. A real-time crime data stream simulator has also been developed for sending simulated data into the speed layer.
 
@@ -26,6 +26,7 @@ This big data app was implemented using [Lambda Architecture](https://en.wikiped
 
 * [Chicago Crimes Dataset](https://data.cityofchicago.org/Public-Safety/Crimes-2001-to-present/ijzp-q8t2)
 * [NOAA GSOD Dataset](https://data.noaa.gov/dataset/dataset/global-surface-summary-of-the-day-gsod)
+* [Chicago Taxi Trips Dataset](https://data.cityofchicago.org/Transportation/Taxi-Trips/wrvz-psew)
 
 ## Start App
 
@@ -185,12 +186,6 @@ Go to [``http://127.0.0.1:3000/``](http://127.0.0.1:3000/) in browser.
 
 Go to [``http://35.225.120.103:3246/``](http://35.225.120.103:3246/) in browser.
 
-### Demo
-
-<p align="center">
-    <img src = "./demo/app_demo.gif">
-</p>
-
 
 ## Notes
 
@@ -198,6 +193,7 @@ Go to [``http://35.225.120.103:3246/``](http://35.225.120.103:3246/) in browser.
 * ``mvn clean install`` could be used to compile all the Maven projects.
 * Speed layers were run in the background using local mode (instead of yarn mode) by default. 
 * Use ``ps -ax | grep spark`` to find the PID of Spark Streaming processes to kill.
+* ``./backend/clear_maven_projects.sh`` and ``./backend/clear_maven_projects_cloud.sh`` could be used to clean the maven projects.
 
 ## To-Do List
 

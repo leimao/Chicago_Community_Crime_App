@@ -1,4 +1,3 @@
-DROP TABLE IF EXISTS leimao_community_crime_by_weather;
 
 CREATE EXTERNAL TABLE leimao_community_crime_by_weather (
     communityName string,
@@ -66,3 +65,18 @@ TBLPROPERTIES ('hbase.table.name' = 'leimao_last_one_year_weather_chicago');
 
 INSERT OVERWRITE TABLE leimao_last_one_year_weather_chicago
     SELECT * FROM leimao_last_one_year_weather;
+
+
+CREATE EXTERNAL TABLE leimao_taxi_trips_by_community_chicago (
+    route string,
+    trip_duration_sum bigint,
+    total_cost_sum bigint,
+    num_trips bigint
+)
+STORED BY 'org.apache.hadoop.hive.hbase.HBaseStorageHandler'
+--Incrementable Cell
+WITH SERDEPROPERTIES ('hbase.columns.mapping' = ':key, taxi:trip_duration_sum#b, taxi:total_cost_sum#b, taxi:num_trips#b')
+TBLPROPERTIES ('hbase.table.name' = 'leimao_taxi_trips_by_community_chicago');
+
+INSERT OVERWRITE TABLE leimao_taxi_trips_by_community_chicago
+    SELECT CONCAT(LOWER(c1.Community), '-', LOWER(c2.Community)), tc.trip_duration_sum, tc.total_cost_sum, tc.num_trips FROM leimao_taxitrips_counts tc JOIN leimao_community c1 ON tc.pickup_community = c1.AreaNumber JOIN leimao_community c2 ON tc.dropoff_community = c2.AreaNumber;

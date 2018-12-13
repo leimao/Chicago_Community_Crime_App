@@ -54,6 +54,12 @@ if $downloadData
         ./hdfs/ingestWeather.sh $weatherDataDir $weatherThriftJar
         ./hdfs/ingestCrime.sh $crimeDataDir
         ./hdfs/ingestMiscellaneous.sh $miscellaneousDataDir
+
+        echo "----------------------------------"
+        echo "Downloading and Ingesting data into HDFS ..."
+        echo "----------------------------------"
+        chmod +x ./hdfs/getAndIngestTaxiTrips.sh
+        ./hdfs/getAndIngestTaxiTrips.sh
 fi
 
 # Load data into Hive
@@ -67,6 +73,7 @@ echo "----------------------------------"
 beeline -u $beelineConfigure -f ./hive/loadCrime.hql
 beeline -u $beelineConfigure -f ./hive/loadWeather.hql
 beeline -u $beelineConfigure -f ./hive/loadCommunity.hql
+beeline -u $beelineConfigure -f ./hive/loadTaxiTrips.hql
 
 # Prepare Hive Views
 echo "----------------------------------"
@@ -78,6 +85,7 @@ echo "----------------------------------"
 beeline -u $beelineConfigure -f ./hive/joinCrimeWeather.hql
 beeline -u $beelineConfigure -f ./hive/viewCrimeFrequency.hql
 beeline -u $beelineConfigure -f ./hive/viewLastOneYearWeather.hql
+beeline -u $beelineConfigure -f ./hive/viewCommunityCommunicationFrequency.hql
 
 # Prepare HBase Views
 echo "----------------------------------"

@@ -6,4 +6,6 @@ create 'leimao_latest_weather', 'weather'
 
 create 'leimao_last_one_year_weather_chicago', 'weather'
 
+create 'leimao_taxi_trips_by_community_chicago', 'taxi'
+
 exit

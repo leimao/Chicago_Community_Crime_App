@@ -1,3 +1,4 @@
 get 'leimao_community_crime_by_weather', 'hyde park'
 get 'leimao_last_one_year_weather_chicago', '20171230'
+get 'leimao_taxi_trips_by_community_chicago', 'hyde park-austin'
 exit
