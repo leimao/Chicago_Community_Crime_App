@@ -186,6 +186,12 @@ Go to [``http://127.0.0.1:3000/``](http://127.0.0.1:3000/) in browser.
 
 Go to [``http://35.225.120.103:3246/``](http://35.225.120.103:3246/) in browser.
 
+### Demo
+
+<p align="center">
+    <img src = "./demo/demo.gif">
+</p>
+
 
 ## Notes
 
